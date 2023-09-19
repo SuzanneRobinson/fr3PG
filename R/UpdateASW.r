@@ -13,6 +13,7 @@ UpdateASW <- function(state, weather, site, parms, general.info){
     # pooledSW = poolFractn * excessSW
     # RunOff = (1 - poolFractn) * excessSW
     # Rainfall - interception
+    LAI <- state[["LAI"]]  # Leaf Area Index (m ^ 2 / m ^ 2 ground)
     LAImaxIntcptn <- parms[["LAImaxIntcptn"]]  # LAI for maximum rainfall interception
     MaxIntcptn <- parms[["MaxIntcptn"]]  # Maximum proportion of rainfall evaporated from canopy
     RainIntcptn <- MaxIntcptn * ifelse(LAImaxIntcptn <= 0, 1, min(1, LAI / LAImaxIntcptn)) * Rain
@@ -31,12 +32,11 @@ UpdateASW <- function(state, weather, site, parms, general.info){
     fCg0 <- parms[["fCg0"]]  # Parameter derived from fCg700 (canopy conductance enhancement factor at 700 ppm)
     CO2 <- site[["CO2"]]
     PhysMod <- state[["PhysMod"]]  # Physiological modifier
-    LAI <- state[["LAI"]]  # Leaf Area Index (m ^ 2 / m ^ 2 ground)
     fCg <- fCg0 / (1 + (fCg0 - 1) * CO2 / 350)  # fCg: CO2 modifier (included 14/06/2017)
     CanCond <- (MinCond + (MaxCond - MinCond) * (min(1, LAI / LAIgcx))) * PhysMod * fCg # fCg included 14/06/2017
     CanCond <- ifelse(CanCond == 0, 0.0001, CanCond)
     # Transpiration - evapotranspiration (J / (m^2 s))
-    e20 <- parms[["e20"]]  # Rate of change of saturated vapour pressure with temperature = 20ºC
+    e20 <- parms[["e20"]]  # Rate of change of saturated vapour pressure with temperature = 20oC
     rhoAir <- parms[["rhoAir"]]  # Density of air (kg / m ^ 3)
     lambda <- parms[["lambda"]]  # Latent heat of vapourisation of H2O (J / kg)
     VPDconv <- parms[["VPDconv"]]  # VPD conversion factor to saturation deficit = 18/29/1000

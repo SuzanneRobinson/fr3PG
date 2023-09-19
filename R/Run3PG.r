@@ -37,7 +37,7 @@ Run3PG <- function(stand.init, weather, site, parms, general.info = parms.genera
         state.mods <- CalculateModifiers(state = state.apar, weather = weather.i, site = site, parms = parms, general.info = general.info)
         state.npp <- EstimateNPP(state = state.mods, parms = parms)
         state.asw <- UpdateASW(state = state.npp, weather = weather.i, site = site, parms = parms, general.info = general.info)
-        state.walloc <- AllocateBiomass(state = state.asw, site = site, parms = parms)
+        state.walloc <- AllocateBiomass(state = state.asw, site = site, parms = parms, weather = weather.i) ## also requires weather.i, to identify current.month
         state.mort <- EstimateMortality(state = state.walloc, parms = parms)
         state.mort[["t"]] <- state.mort[["t"]] + 1 / 12
         state.end <- PredictVariablesInterest.3PG(state = state.mort, parms = parms, cod.pred = cod.pred)

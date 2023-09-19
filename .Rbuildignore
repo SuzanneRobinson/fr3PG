@@ -1,0 +1,10 @@
+01_Implementation_3PG.R
+fr3PG.Rproj
+irradiance.so
+irrad.r
+package_skeleton.r
+setup3PG.sh
+tidy.r
+^.*\.Rproj$
+^\.Rproj\.user$
+run3PG.R

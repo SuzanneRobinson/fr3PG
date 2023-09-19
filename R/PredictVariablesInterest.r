@@ -2,7 +2,9 @@
 # Function to predict variables of interest within 3-PG model
 PredictVariablesInterest.3PG <- function(state, parms, cod.pred){
     # state: vector with state variables
-    # parms: vector with parameters of 3-PG model
+                                        # parms: vector with parameters of 3-PG model
+    leaf.grow <- parms[["leaf.grow"]]  ## Leaf grow parameter
+    leaf.fall <- parms[["leaf.fall"]]  ## Leaf fall parameter
     SLA0 <- parms[["SLA0"]]  # Specific leaf area at age 0 (m ^ 2 / kg)
     SLA1 <- parms[["SLA1"]]  # Specific leaf area for mature leaves  (m ^ 2 / kg)
     tSLA <- parms[["tSLA"]]  # Age at which specific leaf area = (SLA0 + SLA1) / 2 (years)
@@ -13,6 +15,7 @@ PredictVariablesInterest.3PG <- function(state, parms, cod.pred){
     N <- state[["N"]]  # Number of stems per hectare
     Wl <- state[["Wl"]]  # Foliage biomass (tDM / ha)
     Wr <- state[["Wr"]]  # Root biomass (tDM / ha)
+    #WlDormant <- state[["WlDormant"]]  ## Foliage biomass (tDM/ha) when dormant
     Wsbr <- state[["Wsbr"]]  # Stem and branches biomass (tDM / ha)
     SLA <- SLA1 + (SLA0 - SLA1) * exp(-log(2) * (t / tSLA) ^ 2)  # Specific leaf area (m ^ 2 / kg)
     LAI <- Wl * SLA * 0.1  # Leaf Area Index (m ^ 2 per m ^ 2 of ground)
@@ -37,6 +40,8 @@ PredictVariablesInterest.3PG <- function(state, parms, cod.pred){
         Vub <- EstimateV.3PG(N = N, Ww = Ww)  # Stand volume under bark (m ^ 3 / ha)
         dg <- ObtainDg(N = N, G = G)  # Quadratic mean diameter (cm)  
     }
-    state[c("LAI", "Ww", "Wb", "Wbr", "Wa", "W", "hdom", "wsbrg", "G", "Vu", "dg")] <- c(LAI, Ww, Wb, Wbr, Wa, W, hdom, wsbrg, G, Vu, dg)
+    state[c("LAI", "Ww", "Wb", "Wbr", "Wa", "W", "hdom", "wsbrg", "G", "Vu", "dg" ##, "WlDormant"
+            )] <- c(LAI, Ww, Wb, Wbr, Wa, W, hdom, wsbrg, G, Vu, dg ## WlDormant
+                    )
     return(state)
 }

@@ -1,10 +1,10 @@
 Package: fr3PG
 Type: Package
-Title: The Physiological Principles for Predicting Growth Model (3PG)
+Title: The Physiological Principles for Predicting Growth Model (3PG) with deciduous phenology
 Version: 1.0
-Date: 2019-04-04
+Date: 2023-09-014
 Author: Manuel Arias-Rodil
-Maintainer: Georgios Xenakis <georgios.xenakis@forestresearch.gov.uk>
+Maintainer: George Xenakis <georgios.xenakis@forestresearch.gov.uk>
 Depends: R (>= 3.5.3)
 Description: An implementation of the popular 3-PG model by Landsberg & Waring (1997)
 License: Copyright 2017 Manuel Arias-Rodil. Permission is hereby granted, free of charge, to any person obtaining a copy of this script and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions. This copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
