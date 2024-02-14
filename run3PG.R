@@ -105,7 +105,7 @@ default <- list(
 )
 
 
-beech <- list(
+beech <- list( 
   clm.har,
   ## presc,
   ## Stand initalisation
