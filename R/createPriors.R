@@ -4,7 +4,7 @@ createPriors_poplar<-function(poplar,prior_distribution = 'uniform', sd=F){
   # Update with param names to calibrate
   nm<-c("pFS2","pFS20","aS","nS","pRx","pRn","gammaFx","gammaF0","tgammaF","Rttover",
         "mF","mR","mS","SLA0","SLA1","tSLA","alpha","Y", "MaxCond", "LAIgcx", "m0", 
-        "wSx1000","fN0", "MaxIntcptn","k", "fullCanAge", "kF","rhoMin", "rhoMax", "tRho")
+        "wSx1000","fN0", "MaxIntcptn","k", "fullCanAge", "kF","rhoMin", "rhoMax", "tRho", "FR")
   
   f.decrease <- c(
     0.4, # pFS2
@@ -36,7 +36,8 @@ createPriors_poplar<-function(poplar,prior_distribution = 'uniform', sd=F){
     0.0001, # kF 
     0.2, # rhoMin 
     0.2, # rhoMax 
-    1 # tRho 
+    1, # tRho 
+    0.3 #FR
   ) 
   
   f.increase <-
@@ -70,7 +71,8 @@ createPriors_poplar<-function(poplar,prior_distribution = 'uniform', sd=F){
       1, # kF 1
       0.5, # rhoMin
       0.5, # rhoMax
-      8 # tRho
+      8, # tRho
+      0.8 #FR
     ) 
   
   pMaxima <- f.increase*1.5
@@ -86,6 +88,7 @@ createPriors_poplar<-function(poplar,prior_distribution = 'uniform', sd=F){
   pMaxima[21]<-1
   pMaxima[23]<-1
   pMaxima[27]<-1
+  pMaxima[31]<-1
   
   sdVals<-(pMaxima-pMinima)*0.2
 

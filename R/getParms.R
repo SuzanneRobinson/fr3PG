@@ -1,7 +1,7 @@
 #' getParms get baseline parameters for poplar; Populus hybrids; Headlee et al. 2013
 #' @return list of parameters and values
 #' @export
-getParms_poplar<- function(weather = clm.tadcaster,
+getParms_poplar<- function(weather = clm.site,
                      ## ~~ Initial pools ~~ ##
                      t = 0,
                      Wl = 0.01,
@@ -16,7 +16,7 @@ getParms_poplar<- function(weather = clm.tadcaster,
                      ## ~~ Site ~~ ##
                      N = 156, # 6.4 m along rows, 10 m spacing between rows
                      latitude = 53.44,
-                     FR = 0.5, #### Update !!
+                     FR = 0.3, #### Update !!
                      soilclass = 3, # changed from 0 to clay loam (site description clay loam over limestone)
                      ASW = 100,
                      MaxASW = 200,
@@ -33,8 +33,8 @@ getParms_poplar<- function(weather = clm.tadcaster,
                      Topt = 30, #### Update !!
                      Tmax = 48, # These seem high for UK ? Or species specific
                      kF = 0,
-                     SWconst0 = 0.7,#### Update !!
-                     SWpower0 = 9, #### Update !!
+                     SWconst0 = 0.7,#### Update if using soilclass=0
+                     SWpower0 = 9, #### Update if using soilclass=0
                      m0 = 1,
                      fN0 = 0.26,
                      fNn = 1,

@@ -33,7 +33,7 @@ poplarLL<-  function(p){
     {
       output<-   do.call(fr3PG,poplar)%>%
         slice(-1)
-      output$Year<- .GlobalEnv$clm.tadcaster$Year
+      output$Year<- .GlobalEnv$clm.site$Year
       modelled <- sampleOutputPoplar(output,.GlobalEnv$startYear,.GlobalEnv$endYear)
       mod_sim <- data.frame(modelled = modelled, obs = .GlobalEnv$observed, dev = .GlobalEnv$dev)
       mod_sim <- mod_sim[is.na(mod_sim$obs) == F,]
