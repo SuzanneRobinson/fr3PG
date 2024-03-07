@@ -4,7 +4,11 @@ createPriors_poplar<-function(poplar,prior_distribution = 'uniform', sd=F){
   # Update with param names to calibrate
   nm<-c("pFS2","pFS20","aS","nS","pRx","pRn","gammaFx","gammaF0","tgammaF","Rttover",
         "mF","mR","mS","SLA0","SLA1","tSLA","alpha","Y", "MaxCond", "LAIgcx", "m0", 
+<<<<<<< HEAD
         "wSx1000","fN0", "MaxIntcptn","k", "fullCanAge", "kF","rhoMin", "rhoMax", "tRho", "FR")
+=======
+        "wSx1000","fN0", "MaxIntcptn","k", "fullCanAge", "kF","rhoMin", "rhoMax", "tRho")
+>>>>>>> 86aa7db3d7c67afbfd30a0fde7f41d02a654789f
   
   f.decrease <- c(
     0.4, # pFS2
@@ -36,8 +40,12 @@ createPriors_poplar<-function(poplar,prior_distribution = 'uniform', sd=F){
     0.0001, # kF 
     0.2, # rhoMin 
     0.2, # rhoMax 
+<<<<<<< HEAD
     1, # tRho 
     0.3 #FR
+=======
+    1 # tRho 
+>>>>>>> 86aa7db3d7c67afbfd30a0fde7f41d02a654789f
   ) 
   
   f.increase <-
@@ -71,8 +79,12 @@ createPriors_poplar<-function(poplar,prior_distribution = 'uniform', sd=F){
       1, # kF 1
       0.5, # rhoMin
       0.5, # rhoMax
+<<<<<<< HEAD
       8, # tRho
       0.8 #FR
+=======
+      8 # tRho
+>>>>>>> 86aa7db3d7c67afbfd30a0fde7f41d02a654789f
     ) 
   
   pMaxima <- f.increase*1.5
@@ -88,10 +100,41 @@ createPriors_poplar<-function(poplar,prior_distribution = 'uniform', sd=F){
   pMaxima[21]<-1
   pMaxima[23]<-1
   pMaxima[27]<-1
+<<<<<<< HEAD
   pMaxima[31]<-1
   
   sdVals<-(pMaxima-pMinima)*0.2
 
+=======
+  
+  sdVals<-(pMaxima-pMinima)*0.2
+
+  prDatB<-data.frame(names=nm,sd=sdVals,
+                     lower = pMinima, upper = pMaxima)
+  prDatB$names<-(prDatB$names)
+  prDatB<-prDatB[!duplicated(prDatB$names),]
+  
+  priorValsX <- createUniformPrior(lower = prDatB$lower, upper =prDatB$upper)
+  
+  priPlotFunc<-function(prDatBS){
+    pp<-createUniformPrior(lower = prDatBS$lower, upper =prDatBS$upper)
+    
+    ppDat<-data.frame(pp=(pp$sampler(10000)))
+    return(
+      ggplot(data=ppDat,aes(pp))+
+        geom_histogram(bins=50,fill="lightblue", col="darkgray")+
+        ggtitle(paste0(prDatBS$names,": 10k prior samples"))
+    )
+    
+  }
+  prDatBX<-split(prDatB,seq(nrow(prDatB)))
+  
+  plots<-lapply(prDatBX,priPlotFunc)
+  
+  ggarrange(plotlist=plots)
+  
+  
+>>>>>>> 86aa7db3d7c67afbfd30a0fde7f41d02a654789f
   
   # Calculate scaling factor
   sc<-rowMeans(abs(cbind(pMinima,pMaxima) ) )
