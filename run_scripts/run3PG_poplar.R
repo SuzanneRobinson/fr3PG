@@ -70,6 +70,7 @@ output<- output %>%
 # Convert 'yearMonth' to a date format for better plotting
 output$yearMonth <- as.Date(paste0(output$yearMonth, "-01"), format = "%Y-%m-%d")
 
+<<<<<<< HEAD
 pDg<-ggplot(output, aes(x = yearMonth, y = dg)) +
   geom_line() +
   scale_x_date(limits = as.Date(c("1992-01-01", "2019-12-31")), date_breaks = "2 year", date_labels = "%Y") +
@@ -127,6 +128,8 @@ egg::ggarrange(pDg,pVu,pNPP,pLAI)
 
 
 
+=======
+>>>>>>> 86aa7db3d7c67afbfd30a0fde7f41d02a654789f
 output2<-output%>%group_by(Year)%>%
   summarise(dg=mean(dg,na.rm=T),
             Vu=mean(Vu,na.rm=T),
@@ -182,14 +185,18 @@ ggplot() +
   geom_line(data=output2, aes(x=Year, y=dg), color='lightblue',linewidth=1) +
   geom_errorbar(data=dbh_average, aes(x=YEAR, ymin=D.ob..cm.-SD.D.ob..cm., ymax=D.ob..cm.+SD.D.ob..cm.), width=.3, color='black') +
   geom_point(data=dbh_average, aes(x=YEAR, y=D.ob..cm.), size=2, color='black')+
+<<<<<<< HEAD
   geom_point(data=dbh_average, aes(x=YEAR, y= D.ub..cm.), size=2, color='purple')+
   geom_point(data=dbh_average, aes(x=YEAR, y= DBH.Avarage.across.years..2005.2022), size=2, color='red')
   
+=======
+>>>>>>> 86aa7db3d7c67afbfd30a0fde7f41d02a654789f
   #scale_x_date(limits = as.Date(c("1992-01-01", "2019-12-31")), date_breaks = "2 year", date_labels = "%Y") +
   labs(x = "Year",
        y = "Mean stand DBH [cm]")+
   theme_classic() 
 
+<<<<<<< HEAD
 
   
   ggplot() +
@@ -217,6 +224,8 @@ ggplot() +
 
 
 
+=======
+>>>>>>> 86aa7db3d7c67afbfd30a0fde7f41d02a654789f
 # Create array with DBH
 obs<-c(dbh_average$D.ob..cm.)
 
